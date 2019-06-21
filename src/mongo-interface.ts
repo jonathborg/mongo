@@ -11,7 +11,7 @@ export default class Mongo {
         this.config = config
     }
 
-    private getConnInstance() {
+    public createConnInstance() {
         return new Promise((resolve, reject) => {
 
             if (_conn) {
@@ -42,8 +42,7 @@ export default class Mongo {
     }
 
     async query(params: QueryParams) {
-        let conn = await this.getConnInstance()
-        let chain: any = conn
+        let chain: any = _conn
         for (let key in params) {
             if (params.hasOwnProperty(key)) {
                 if (!(key in chain))
