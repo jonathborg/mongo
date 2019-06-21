@@ -1,0 +1,21 @@
+{
+  "name": "@dev2world/mongo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/index.js",
+  "scripts": {
+    "prepublishOnly": "tsc"
+  },
+  "author": {
+    "name": "Jonathan Borges"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.1.13"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^3.1.19",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.1"
+  }
+}
