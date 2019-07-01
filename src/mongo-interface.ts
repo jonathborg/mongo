@@ -1,8 +1,9 @@
 import { MongoClient, } from 'mongodb'
 import { QueryParams } from './interfaces'
-var _conn
 
 export default class Mongo {
+
+    _conn
 
     constructor(private config) {
         if (!config) {
@@ -14,8 +15,8 @@ export default class Mongo {
     public createConnInstance() {
         return new Promise((resolve, reject) => {
 
-            if (_conn) {
-                return resolve(_conn)
+            if (this._conn) {
+                return resolve(this._conn)
             }
 
             let uri = `mongodb://${this.config.host}/${this.config.port}`
@@ -36,14 +37,14 @@ export default class Mongo {
                 if (err) {
                     return reject(err)
                 }
-                _conn = client
+                this._conn = client
                 return resolve(this)
             })
         })
     }
 
     async query(params: QueryParams) {
-        let chain: any = _conn
+        let chain: any = this._conn
         for (let key in params) {
             if (params.hasOwnProperty(key)) {
                 if (!(key in chain))
@@ -57,14 +58,14 @@ export default class Mongo {
     }
 
     async close(config) {
-        if (_conn)
-            await _conn[config].close()
+        if (this._conn)
+            await this._conn[config].close()
     }
 
     async closeAll() {
-        if (_conn) {
-            for (let c in _conn)
-                _conn[c].close()
+        if (this._conn) {
+            for (let c in this._conn)
+                this._conn[c].close()
         }
     }
 }
