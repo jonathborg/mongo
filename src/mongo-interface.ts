@@ -32,11 +32,12 @@ export default class Mongo {
                 }
             }
 
-            MongoClient.connect(uri, mongoClientOptions, (err, conn) => {
+            MongoClient.connect(uri, mongoClientOptions, (err, client) => {
                 if (err) {
                     return reject(err)
                 }
-                return resolve(conn)
+                _conn = client
+                return resolve(this)
             })
         })
     }
